@@ -2,7 +2,8 @@ const router = require("express").Router();
 
 let Task = require("../models/task");
 
-//localhost:8070/task/add
+//adding a new task for a given date
+//localhost:8070/task/
 
 http: router.route("/").post((req, res) => {
   const taskName = req.body.taskName;
@@ -26,6 +27,7 @@ http: router.route("/").post((req, res) => {
     });
 });
 
+//retrieve list of the tasks
 //localhost:8070/task/
 
 http: router.route("/").get((req, res) => {
@@ -38,7 +40,8 @@ http: router.route("/").get((req, res) => {
     });
 });
 
-//localhost:8070/task/update/
+//Update previously added task 
+//localhost:8070/task/:id
 
 http: router.route("/:id").put(async (req, res) => {
   let taskID = req.params.id;
@@ -70,7 +73,7 @@ http: router.route("/:id").put(async (req, res) => {
     });
 });
 
-
+//delete a previously added task
 //localhost:8090/task/delete/
 
 http: router.route("/:id").delete(async (req, res) => {
@@ -88,6 +91,10 @@ http: router.route("/:id").delete(async (req, res) => {
         .send({ status: "Error with deleting Task", error: err.message });
     });
 });
+
+
+//retrieve a specific task 
+//localhost:8090/task/:id
 
 router.route("/:id").get(async (req, res) => {
   let taskID = req.params.id;
